@@ -8,8 +8,8 @@ from morl_baselines.multi_policy.morld.morld import MORLD
 def main():
     gamma = 0.99
 
-    env = mo_gym.make("mo-halfcheetah-v4")
-    eval_env = mo_gym.make("mo-halfcheetah-v4")
+    env = mo_gym.make("mo-halfcheetah-v5")
+    eval_env = mo_gym.make("mo-halfcheetah-v5")
 
     algo = MORLD(
         env=env,
