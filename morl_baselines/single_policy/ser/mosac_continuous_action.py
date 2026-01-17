@@ -561,7 +561,7 @@ class MOSAC(MOPolicy):
             if self.global_step > self.learning_starts:
                 self.update()
                 if self.log and self.global_step % 100 == 0:
-                    print("SPS:", int(self.global_step / (time.time() - start_time)))
+                    # print("SPS:", int(self.global_step / (time.time() - start_time)))
                     wandb.log(
                         {
                             "charts/SPS": int(self.global_step / (time.time() - start_time)),
