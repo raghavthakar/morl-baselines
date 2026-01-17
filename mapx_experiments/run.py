@@ -34,6 +34,14 @@ def parse_args():
         help="Reference point for hypervolume (space separated, e.g. -100 -100)"
     )
 
+    # 4. Seed
+    parser.add_argument(
+        "--seed", 
+        type=int, 
+        default=int(2024), 
+        help="Seed"
+    )
+
     return parser.parse_args()
 
 
@@ -52,6 +60,10 @@ def main():
     env = mo_gym.make(args.env_name)
     eval_env = mo_gym.make(args.env_name)
 
+    # Seeding
+    env.reset(seed=args.seed)
+    eval_env.reset(seed=args.seed)
+
     algo = MORLD(
         env=env,
         env_name=env.unwrapped.spec.id, # Often useful for wandb project naming
@@ -67,7 +79,7 @@ def main():
         shared_buffer=True,
         sharing_mechanism=[],
         weight_adaptation_method="PSA",
-        seed=0,
+        seed=args.seed,
     )
 
     algo.train(
