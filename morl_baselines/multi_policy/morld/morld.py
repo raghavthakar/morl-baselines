@@ -56,6 +56,7 @@ class MORLD(MOAgent):
     def __init__(
         self,
         env: gym.Env,
+        env_name: str,
         scalarization_method: str = "ws",  # "ws" or "tch"
         evaluation_mode: str = "ser",  # "esr" or "ser"
         policy_name: str = "MOSAC",
@@ -84,6 +85,7 @@ class MORLD(MOAgent):
 
         Args:
             env: environment
+            env_name: name of the environemnt
             scalarization_method: scalarization method to apply. "ws" or "tch".
             evaluation_mode: esr or ser (for evaluation env)
             policy_name: name of the underlying policy to use: "MOSAC", EUPG can be easily adapted.
@@ -171,6 +173,8 @@ class MORLD(MOAgent):
         self.experiment_name = experiment_name
         self.log = log
 
+        self.experiment_name += f"-{env_name}"
+        self.experiment_name += f"-{seed}"
         self.experiment_name += f"({policy_name})"
         if shared_buffer:
             self.experiment_name += "-SB"
