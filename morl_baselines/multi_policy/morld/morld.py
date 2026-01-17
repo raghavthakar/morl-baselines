@@ -504,7 +504,7 @@ class MORLD(MOAgent):
         num_eval_weights_for_eval: int = 50,
         reset_num_timesteps: bool = False,
         checkpoints: bool = True,
-        save_freq: int = 10000,
+        save_freq: int = 500000,
     ):
         """Trains the algorithm.
 
