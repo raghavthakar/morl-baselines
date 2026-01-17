@@ -30,6 +30,7 @@ def main():
 
     algo.train(
         eval_env=eval_env,
+        eval_ep_len=750,
         total_timesteps=int(3e6) + 1,
         ref_point=np.array([-100.0, -100.0]),
         known_pareto_front=None,

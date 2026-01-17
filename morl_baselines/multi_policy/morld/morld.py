@@ -268,7 +268,7 @@ class MORLD(MOAgent):
         self.current_policy = (self.current_policy + 1) % self.pop_size
         return candidate
 
-    def __eval_policy(self, policy: Policy, eval_env: gym.Env, num_eval_episodes_for_front: int) -> np.ndarray:
+    def __eval_policy(self, policy: Policy, eval_env: gym.Env, num_eval_episodes_for_front: int, ep_len: int = 1000) -> np.ndarray:
         """Evaluates a policy.
 
         Args:
@@ -283,6 +283,7 @@ class MORLD(MOAgent):
             for _ in range(num_eval_episodes_for_front):
                 _, _, _, discounted_reward = policy.wrapped.policy_eval(
                     eval_env,
+                    ep_len,
                     weights=policy.weights,
                     scalarization=self.scalarization,
                     log=self.log,
@@ -310,11 +311,12 @@ class MORLD(MOAgent):
         num_eval_weights_for_eval: int,
         ref_point: np.ndarray,
         known_front: Optional[List[np.ndarray]] = None,
+        eval_ep_len: int = 1000,
     ):
         """Evaluates all policies and store their current performances on the buffer and pareto archive."""
         evals = []
         for i, agent in enumerate(self.population):
-            discounted_reward = self.__eval_policy(agent, eval_env, num_eval_episodes_for_front)
+            discounted_reward = self.__eval_policy(agent, eval_env, num_eval_episodes_for_front, eval_ep_len)
             evals.append(discounted_reward)
             # Storing current results
             self.archive.add(agent, discounted_reward)
@@ -497,6 +499,7 @@ class MORLD(MOAgent):
         eval_env: gym.Env,
         ref_point: np.ndarray,
         known_pareto_front: Optional[List[np.ndarray]] = None,
+        eval_ep_len: int = 1000,
         num_eval_episodes_for_front: int = 5,
         num_eval_weights_for_eval: int = 50,
         reset_num_timesteps: bool = False,
@@ -540,6 +543,7 @@ class MORLD(MOAgent):
             num_eval_weights_for_eval,
             ref_point,
             known_pareto_front,
+            eval_ep_len=eval_ep_len
         )
 
         while self.global_step < total_timesteps:
@@ -560,6 +564,7 @@ class MORLD(MOAgent):
                 num_eval_weights_for_eval,
                 ref_point,
                 known_pareto_front,
+                eval_ep_len=eval_ep_len,
             )
 
             # cooperation

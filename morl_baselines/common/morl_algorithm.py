@@ -85,6 +85,7 @@ class MOPolicy(ABC):
     def policy_eval(
         self,
         eval_env,
+        ep_len: int,
         num_episodes: int = 5,
         scalarization=np.dot,
         weights: Optional[np.ndarray] = None,
@@ -107,7 +108,7 @@ class MOPolicy(ABC):
             scalarized_discounted_return,
             vec_return,
             discounted_vec_return,
-        ) = policy_evaluation_mo(self, eval_env, scalarization=scalarization, w=weights, rep=num_episodes)
+        ) = policy_evaluation_mo(self, eval_env, ep_len, scalarization=scalarization, w=weights, rep=num_episodes)
 
         if log:
             self.__report(
