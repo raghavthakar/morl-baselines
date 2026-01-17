@@ -23,6 +23,7 @@ from morl_baselines.common.weights import equally_spaced_weights
 def eval_mo(
     agent,
     env,
+    ep_len: int = 1000,
     w: Optional[np.ndarray] = None,
     scalarization=np.dot,
     render: bool = False,
@@ -43,11 +44,13 @@ def eval_mo(
     done = False
     vec_return, disc_vec_return = np.zeros_like(w), np.zeros_like(w)
     gamma = 1.0
+    steps = 0
     while not done:
+        steps += 1
         if render:
             env.render()
         obs, r, terminated, truncated, info = env.step(agent.eval(obs, w))
-        done = terminated or truncated
+        done = terminated or truncated or steps==ep_len
         vec_return += r
         disc_vec_return += gamma * r
         gamma *= agent.gamma
