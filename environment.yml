@@ -1,4 +1,4 @@
-name: /home/raghav/Research/morl-baselines-env
+name: /nfs/stak/users/viswansi/hpc-share/morl-baselines-env
 channels:
   - conda-forge
   - https://repo.anaconda.com/pkgs/main
@@ -89,12 +89,12 @@ dependencies:
       - six==1.17.0
       - smmap==5.0.2
       - sympy==1.14.0
-      - torch==2.9.1+cpu
-      - torchvision==0.24.1+cpu
+      - torch
+      - torchvision
       - typing-extensions==4.15.0
       - typing-inspection==0.4.2
       - urllib3==2.6.3
       - wandb==0.24.0
       - wrapt==2.0.1
       - zipp==3.23.0
-prefix: /home/raghav/Research/morl-baselines-env
+prefix: /nfs/stak/users/viswansi/hpc-share/morl-baselines-env
