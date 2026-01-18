@@ -14,7 +14,7 @@ CONDA_ENV_PATH = "/nfs/stak/users/viswansi/hpc-share/morl-baselines-env"
 PROJECT_ROOT = Path("/nfs/stak/users/viswansi/hpc-share/morl-baselines-env/morl-baselines")
 
 # ----------------- WANDB SETUP -----------------
-WANDB_API_KEY = "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"
+WANDB_API_KEY = ""
 WANDB_ENTITY = ""
 WANDB_PROJECT = "MORL-Baselines"
 
